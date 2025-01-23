@@ -1,3 +1,4 @@
-# vite-react-tenpureeto
+# vaporware-r3f
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules. Tailwind CSS is also added to the project.
+This is a [React Three Fiber](https://github.com/pmndrs/react-three-fiber) project bootstrapped with [Vite](https://vitejs.dev/).
+This is following the https://blog.maximeheckel.com/posts/vaporwave-3d-scene-with-threejs/ tutorial of Maxime Heckel.

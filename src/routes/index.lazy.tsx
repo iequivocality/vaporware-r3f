@@ -1,3 +1,5 @@
+import { createLazyFileRoute } from "@tanstack/react-router";
+
 import {
 	Canvas,
 	extend,
@@ -5,7 +7,7 @@ import {
 	useLoader,
 	useThree,
 } from "@react-three/fiber";
-import "./App.css";
+
 import { Effects, OrbitControls } from "@react-three/drei";
 import { Mesh, TextureLoader, SpotLight } from "three";
 import { useMemo, useRef } from "react";
@@ -15,6 +17,10 @@ import {
 	RGBShiftShader,
 	ShaderPass,
 } from "three-stdlib";
+
+export const Route = createLazyFileRoute("/")({
+	component: Index,
+});
 
 extend({ RenderPass, ShaderPass });
 
@@ -125,25 +131,18 @@ function SpotLightRight() {
 	);
 }
 
-function App() {
+function Index() {
 	return (
-		<div className="w-screen h-screen bg-gray-950">
-			<Canvas
-				camera={{ fov: 75, near: 0.1, far: 15, position: [0, 0.1, 1.1] }}
-				dpr={Math.min(window.devicePixelRatio, 2)}
-			>
-				<Vaporwave />
-				<SpotLightLeft />
-				<SpotLightRight />
-				<fog attach="fog" args={[0x000000, 1, 2.5]} />
-				<OrbitControls enableDamping />
-				<VaporwaveEffects />
-			</Canvas>
-			<div className="absolute text-gray-200 inset-0 p-4">
-				<h1 className="text-2xl font-bold">vaporware-r3f</h1>
-			</div>
-		</div>
-	);
+    <Canvas
+      camera={{ fov: 75, near: 0.1, far: 15, position: [0, 0.1, 1.1] }}
+      dpr={Math.min(window.devicePixelRatio, 2)}
+    >
+      <Vaporwave />
+      <SpotLightLeft />
+      <SpotLightRight />
+      <fog attach="fog" args={[0x000000, 1, 2.5]} />
+      <OrbitControls enableDamping />
+      <VaporwaveEffects />
+    </Canvas>
+  );
 }
-
-export default App;
