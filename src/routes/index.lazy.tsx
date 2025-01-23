@@ -133,16 +133,16 @@ function SpotLightRight() {
 
 function Index() {
 	return (
-    <Canvas
-      camera={{ fov: 75, near: 0.1, far: 15, position: [0, 0.1, 1.1] }}
-      dpr={Math.min(window.devicePixelRatio, 2)}
-    >
-      <Vaporwave />
-      <SpotLightLeft />
-      <SpotLightRight />
-      <fog attach="fog" args={[0x000000, 1, 2.5]} />
-      <OrbitControls enableDamping />
-      <VaporwaveEffects />
-    </Canvas>
-  );
+		<Canvas
+			camera={{ fov: 75, near: 0.1, far: 15, position: [0, 0.1, 1.1] }}
+			dpr={Math.min(window.devicePixelRatio, 2)}
+		>
+			<Vaporwave />
+			<SpotLightLeft />
+			<SpotLightRight />
+			<fog attach="fog" args={[0x000000, 1, 2.5]} />
+			<OrbitControls enableDamping />
+			<VaporwaveEffects />
+		</Canvas>
+	);
 }
