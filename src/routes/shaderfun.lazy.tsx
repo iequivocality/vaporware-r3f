@@ -2,7 +2,7 @@ import { OrbitControls } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { createLazyFileRoute } from "@tanstack/react-router";
 import { useMemo, useRef } from "react";
-import { Color, DoubleSide, Mesh, ShaderMaterial } from "three";
+import { Color, DoubleSide, type Mesh, type ShaderMaterial } from "three";
 
 export const Route = createLazyFileRoute("/shaderfun")({
 	component: About,
@@ -17,7 +17,7 @@ const fragmentShader = `
   void main() {
     vec2 normalizedPixel = gl_FragCoord.xy / 600.0;
     vec3 color = mix(u_colorA, u_colorB, normalizedPixel.y);
-
+		color.y = smoothstep(0.1, 0.3, gl_FragCoord.y);
     gl_FragColor = vec4(color, 1.0);
   }
 `;
@@ -33,6 +33,7 @@ const vertexShader = `
     vec4 modelPosition = modelMatrix * vec4(position, 1.0);    
     modelPosition.y += sin(modelPosition.x * 4.0 + u_time * 2.0) * 0.2;
     modelPosition.z += sin(modelPosition.y * 4.0 + u_time * 2.0) * 0.2;
+		// modelPosition.z += smoothstep(0.0, 0.5, modelPosition.y) * 0.2;
     
     vec4 viewPosition = viewMatrix * modelPosition;
     vec4 projectedPosition = projectionMatrix * viewPosition;
@@ -56,19 +57,23 @@ function MovingPlane() {
 
 	useFrame((state) => {
 		const { clock } = state;
-		const material = mesh.current.material as ShaderMaterial;
+		const material = mesh.current!.material as ShaderMaterial;
 		material.uniforms.u_time.value = clock.getElapsedTime();
 	});
 
 	return (
-		<mesh ref={mesh} position={[0, 0, 0]} rotation={[-Math.PI * 0.5, 0, 0]} scale={1.5}>
+		<mesh
+			ref={mesh}
+			position={[0, 0, 0]}
+			rotation={[-Math.PI * 0.5, 0, 0]}
+			scale={1.5}
+		>
 			<planeGeometry args={[1, 1, 32, 32]} />
 			<shaderMaterial
 				fragmentShader={fragmentShader}
 				vertexShader={vertexShader}
 				uniforms={uniforms}
 				side={DoubleSide}
-        wireframe
 			/>
 		</mesh>
 	);
@@ -78,7 +83,7 @@ function About() {
 	return (
 		<Canvas camera={{ position: [1.0, 1.5, 1.0] }}>
 			<MovingPlane />
-      <axesHelper />
+			<axesHelper />
 			<OrbitControls />
 		</Canvas>
 	);

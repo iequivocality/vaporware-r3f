@@ -9,7 +9,7 @@ import {
 } from "@react-three/fiber";
 
 import { Effects, OrbitControls } from "@react-three/drei";
-import { Mesh, TextureLoader, SpotLight } from "three";
+import { type Mesh, TextureLoader, SpotLight } from "three";
 import { useMemo, useRef } from "react";
 import {
 	GammaCorrectionShader,
