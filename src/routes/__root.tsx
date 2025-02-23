@@ -21,6 +21,12 @@ export const Route = createRootRoute({
 					>
 						ShaderFun
 					</Link>
+					<Link
+						to="/particle-basic"
+						className="grid place-items-center [&.active]:underline w-24"
+					>
+						Particle Basic
+					</Link>
 				</div>
 			</nav>
 			<div className="col-span-10">
