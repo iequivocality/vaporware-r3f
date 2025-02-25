@@ -8,113 +8,113 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute } from "@tanstack/react-router";
 
 // Import Routes
 
-import { Route as rootRoute } from './routes/__root'
+import { Route as rootRoute } from "./routes/__root";
 
 // Create Virtual Routes
 
-const ShaderfunLazyImport = createFileRoute('/shaderfun')()
-const ParticleBasicLazyImport = createFileRoute('/particle-basic')()
-const IndexLazyImport = createFileRoute('/')()
+const ShaderfunLazyImport = createFileRoute("/shaderfun")();
+const ParticleBasicLazyImport = createFileRoute("/particle-basic")();
+const IndexLazyImport = createFileRoute("/")();
 
 // Create/Update Routes
 
 const ShaderfunLazyRoute = ShaderfunLazyImport.update({
-  id: '/shaderfun',
-  path: '/shaderfun',
-  getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/shaderfun.lazy').then((d) => d.Route))
+	id: "/shaderfun",
+	path: "/shaderfun",
+	getParentRoute: () => rootRoute,
+} as any).lazy(() => import("./routes/shaderfun.lazy").then((d) => d.Route));
 
 const ParticleBasicLazyRoute = ParticleBasicLazyImport.update({
-  id: '/particle-basic',
-  path: '/particle-basic',
-  getParentRoute: () => rootRoute,
+	id: "/particle-basic",
+	path: "/particle-basic",
+	getParentRoute: () => rootRoute,
 } as any).lazy(() =>
-  import('./routes/particle-basic.lazy').then((d) => d.Route),
-)
+	import("./routes/particle-basic.lazy").then((d) => d.Route),
+);
 
 const IndexLazyRoute = IndexLazyImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/index.lazy').then((d) => d.Route))
+	id: "/",
+	path: "/",
+	getParentRoute: () => rootRoute,
+} as any).lazy(() => import("./routes/index.lazy").then((d) => d.Route));
 
 // Populate the FileRoutesByPath interface
 
-declare module '@tanstack/react-router' {
-  interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexLazyImport
-      parentRoute: typeof rootRoute
-    }
-    '/particle-basic': {
-      id: '/particle-basic'
-      path: '/particle-basic'
-      fullPath: '/particle-basic'
-      preLoaderRoute: typeof ParticleBasicLazyImport
-      parentRoute: typeof rootRoute
-    }
-    '/shaderfun': {
-      id: '/shaderfun'
-      path: '/shaderfun'
-      fullPath: '/shaderfun'
-      preLoaderRoute: typeof ShaderfunLazyImport
-      parentRoute: typeof rootRoute
-    }
-  }
+declare module "@tanstack/react-router" {
+	interface FileRoutesByPath {
+		"/": {
+			id: "/";
+			path: "/";
+			fullPath: "/";
+			preLoaderRoute: typeof IndexLazyImport;
+			parentRoute: typeof rootRoute;
+		};
+		"/particle-basic": {
+			id: "/particle-basic";
+			path: "/particle-basic";
+			fullPath: "/particle-basic";
+			preLoaderRoute: typeof ParticleBasicLazyImport;
+			parentRoute: typeof rootRoute;
+		};
+		"/shaderfun": {
+			id: "/shaderfun";
+			path: "/shaderfun";
+			fullPath: "/shaderfun";
+			preLoaderRoute: typeof ShaderfunLazyImport;
+			parentRoute: typeof rootRoute;
+		};
+	}
 }
 
 // Create and export the route tree
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexLazyRoute
-  '/particle-basic': typeof ParticleBasicLazyRoute
-  '/shaderfun': typeof ShaderfunLazyRoute
+	"/": typeof IndexLazyRoute;
+	"/particle-basic": typeof ParticleBasicLazyRoute;
+	"/shaderfun": typeof ShaderfunLazyRoute;
 }
 
 export interface FileRoutesByTo {
-  '/': typeof IndexLazyRoute
-  '/particle-basic': typeof ParticleBasicLazyRoute
-  '/shaderfun': typeof ShaderfunLazyRoute
+	"/": typeof IndexLazyRoute;
+	"/particle-basic": typeof ParticleBasicLazyRoute;
+	"/shaderfun": typeof ShaderfunLazyRoute;
 }
 
 export interface FileRoutesById {
-  __root__: typeof rootRoute
-  '/': typeof IndexLazyRoute
-  '/particle-basic': typeof ParticleBasicLazyRoute
-  '/shaderfun': typeof ShaderfunLazyRoute
+	__root__: typeof rootRoute;
+	"/": typeof IndexLazyRoute;
+	"/particle-basic": typeof ParticleBasicLazyRoute;
+	"/shaderfun": typeof ShaderfunLazyRoute;
 }
 
 export interface FileRouteTypes {
-  fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/particle-basic' | '/shaderfun'
-  fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/particle-basic' | '/shaderfun'
-  id: '__root__' | '/' | '/particle-basic' | '/shaderfun'
-  fileRoutesById: FileRoutesById
+	fileRoutesByFullPath: FileRoutesByFullPath;
+	fullPaths: "/" | "/particle-basic" | "/shaderfun";
+	fileRoutesByTo: FileRoutesByTo;
+	to: "/" | "/particle-basic" | "/shaderfun";
+	id: "__root__" | "/" | "/particle-basic" | "/shaderfun";
+	fileRoutesById: FileRoutesById;
 }
 
 export interface RootRouteChildren {
-  IndexLazyRoute: typeof IndexLazyRoute
-  ParticleBasicLazyRoute: typeof ParticleBasicLazyRoute
-  ShaderfunLazyRoute: typeof ShaderfunLazyRoute
+	IndexLazyRoute: typeof IndexLazyRoute;
+	ParticleBasicLazyRoute: typeof ParticleBasicLazyRoute;
+	ShaderfunLazyRoute: typeof ShaderfunLazyRoute;
 }
 
 const rootRouteChildren: RootRouteChildren = {
-  IndexLazyRoute: IndexLazyRoute,
-  ParticleBasicLazyRoute: ParticleBasicLazyRoute,
-  ShaderfunLazyRoute: ShaderfunLazyRoute,
-}
+	IndexLazyRoute: IndexLazyRoute,
+	ParticleBasicLazyRoute: ParticleBasicLazyRoute,
+	ShaderfunLazyRoute: ShaderfunLazyRoute,
+};
 
 export const routeTree = rootRoute
-  ._addFileChildren(rootRouteChildren)
-  ._addFileTypes<FileRouteTypes>()
+	._addFileChildren(rootRouteChildren)
+	._addFileTypes<FileRouteTypes>();
 
 /* ROUTE_MANIFEST_START
 {
